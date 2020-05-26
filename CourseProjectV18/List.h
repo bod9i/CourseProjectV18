@@ -10,7 +10,8 @@ export
 #endif
 
 template <typename T>
-class List {
+class List 
+{
 
 private:
 	struct Node {
@@ -45,36 +46,42 @@ private:
 };
 
 template <typename T>
-List<T>::~List() {
+List<T>::~List() 
+{
 	while (!isEmpty())
 		remove(0);
 }
 
 template <typename T>
-List<T>::List() {
+List<T>::List() 
+{
 	size = 0;
 	head = NULL;
 }
 
 template <typename T>
-List<T>::List(Node* aHead) {
+List<T>::List(Node* aHead) 
+{
 	size = 0;
 	head = aHead;
-	for (Node* cur = head; cur != NULL; cur = cur->next) {
+	for (Node* cur = head; cur != NULL; cur = cur->next) 
+	{
 		// cout << cur -> data << endl;
 		size++;
 	}
 }
 
 template <typename T>
-List<T>::List(const List& aList) {
+List<T>::List(const List& aList) 
+{
 	size = aList.size;
 
 	head = new Node;
 	head->data = aList.head->data;
 	Node* cur = head;
 
-	for (Node* cp_node = aList.head->next; cp_node != NULL; cp_node = cp_node->next) {
+	for (Node* cp_node = aList.head->next; cp_node != NULL; cp_node = cp_node->next) 
+	{
 		cur->next = new Node;
 		cur = cur->next;
 		cur->data = cp_node->data;
@@ -84,23 +91,28 @@ List<T>::List(const List& aList) {
 }
 
 template <typename T>
-void List<T>::add(int index, T data) {
-	if (index < 0) {
+void List<T>::add(int index, T data) 
+{
+	if (index < 0) 
+	{
 		cout << "Negative index" << endl;
 		return;
 	}
-	if (index > size) {
+	if (index > size) 
+	{
 		cout << "Extension is not supported" << endl;
 		return;
 	}
 	//if insert head
-	if (index == 0) {
+	if (index == 0) 
+	{
 		Node* new_head = new Node;
 		new_head->next = NULL;
 		new_head->data = data;
 		head = new_head;
 	}//if insert into middle
-	else {
+	else 
+	{
 		Node* prev = find(index - 1);
 		Node* node = new Node;
 		node->data = data;
@@ -112,22 +124,26 @@ void List<T>::add(int index, T data) {
 
 template <typename T>
 void List<T>::remove(int index) {
-	if (size == 0) {
+	if (size == 0) 
+	{
 		cout << "No item to remove in list!!" << endl;
 		return;
 	}
-	else if (index >= size || index < 0) {
+	else if (index >= size || index < 0) 
+	{
 		cout << "No item with given index!!" << endl;
 		return;
 	}
 
 	Node* cur;
 	//if head ptr
-	if (index == 0) {
+	if (index == 0) 
+	{
 		cur = head;
 		head = head->next;
 	}
-	else {
+	else 
+	{
 		Node* prev = find(index - 1);
 		cur = prev->next;
 		prev->next = cur->next;
@@ -139,10 +155,12 @@ void List<T>::remove(int index) {
 }
 
 template<typename T>
-void List<T>::update(int index, T data) {
+void List<T>::update(int index, T data) 
+{
 	Node* item = find(index);
 
-	if (item == NULL) {
+	if (item == NULL) 
+	{
 		cout << "Not found item with this index" << endl;
 		return;
 	}
@@ -153,15 +171,19 @@ void List<T>::update(int index, T data) {
 	REMOVE GIVEN NODE FROM THE LIST
 */
 template <typename T>
-void List<T>::removeNode(Node* node) {
-	if (size == 0) {
+void List<T>::removeNode(Node* node) 
+{
+	if (size == 0) 
+	{
 		cout << "List is empty!!" << endl;
 		return;
 	}
-	if (node->next == NULL) { // if node is the tail
+	if (node->next == NULL) 
+	{ // if node is the tail
 		remove(getLength() - 1);
 	}
-	else {
+	else 
+	{
 		Node* next_node = node->next;
 		node->data = next_node->data;
 		// remove next_node
@@ -180,8 +202,10 @@ List<T>* List<T>::clone() const
 }
 
 template <typename T>
-T List<T>::get(int index) {
-	if (index > size || index < 0) {
+T List<T>::get(int index) 
+{
+	if (index > size || index < 0) 
+	{
 		cout << "Wrong index value!!!" << endl;
 		return NULL;
 	}
@@ -191,28 +215,33 @@ T List<T>::get(int index) {
 }
 
 template <typename T>
-typename List<T>::Node* List<T>::find(int index) {
+typename List<T>::Node* List<T>::find(int index) 
+{
 	Node* cur = head;
 
 	if (index > size) return NULL;
 
-	for (int i = 0; i < index; i++) {
+	for (int i = 0; i < index; i++) 
+	{
 		cur = cur->next;
 	}
 	return cur;
 }
 
 template <typename T>
-bool List<T>::isEmpty() {
+bool List<T>::isEmpty() 
+{
 	return (size == 0) ? true : false;
 }
 
 template <typename T>
-int List<T>::getLength() {
+int List<T>::getLength() 
+{
 	return size;
 }
 
 template <typename T>
-T List<T>::operator[](int index) {
+T List<T>::operator[](int index) 
+{
 	return get(index);
 }
