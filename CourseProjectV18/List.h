@@ -1,11 +1,15 @@
+#pragma once
+
 #include <iostream>
-#include <stdlib.h>	/* srand, rand */
-#include <map>
+#include "List.h"
 
 using namespace std;
-template <typename T>
 
-#pragma region Implementation
+#ifdef USE_EXPORT_KEYWORD
+export
+#endif
+
+template <typename T>
 class List {
 
 private:
@@ -28,24 +32,17 @@ public:
 	int getLength();
 	void add(int index, T data);
 	void remove(int index);
+	void update(int index, T data);
 	T get(int index);
-	T extract(int index); /*get the value and remove the node */
-	void printList();
-	void removeDuplicates();
-	void randomIntFill(int item_num, int max);
 	void removeNode(Node* node);
 	List<T>* clone() const;
 	Node* find(int index);
-	Node* sumDigitsWithCarry(Node* head1, Node* head2); // given two list of digits sum those lists
-							   // like they are natural numbers with given 1o's order
-							   // 9 -> 5 + 9 -> 4 = 8 -> 0 -> 1 = 108
 	T operator[] (int index);
 
 private:
 	int size;
 	Node* head;
 };
-
 
 template <typename T>
 List<T>::~List() {
@@ -89,17 +86,17 @@ List<T>::List(const List& aList) {
 template <typename T>
 void List<T>::add(int index, T data) {
 	if (index < 0) {
-		cout << "Negative index!!" << endl;
+		cout << "Negative index" << endl;
 		return;
 	}
 	if (index > size) {
-		cout << "Extension is not supported!!" << endl;
+		cout << "Extension is not supported" << endl;
 		return;
 	}
 	//if insert head
 	if (index == 0) {
 		Node* new_head = new Node;
-		new_head->next = head;
+		new_head->next = NULL;
 		new_head->data = data;
 		head = new_head;
 	}//if insert into middle
@@ -111,19 +108,6 @@ void List<T>::add(int index, T data) {
 		prev->next = node;
 	}
 	size++;
-}
-
-template <typename T>
-T List<T> ::extract(int index) {
-	if (index < 0 || index >= size) {
-		cout << "Wrong index value !!!" << endl;
-		return 0;
-	}
-	Node* node = find(index);
-	T ret_data = node->data;
-	remove(index);
-	node = NULL;
-	return ret_data;
 }
 
 template <typename T>
@@ -154,39 +138,17 @@ void List<T>::remove(int index) {
 	size--;
 }
 
-/*
-REMOVE DUPLICATE ENTRIES INPLACE
-*/
-template <typename T>
-void List<T> ::removeDuplicates() {
-	if (size < 2)
+template<typename T>
+void List<T>::update(int index, T data) {
+	Node* item = find(index);
+
+	if (item == NULL) {
+		cout << "Not found item with this index" << endl;
 		return;
+	}
 
-	Node* ind = head;
-	Node* temp = NULL;
-	for (Node* cur = head->next; cur != NULL; cur = cur->next) {
-		T value = cur->data;
-		temp = head;
-		for (temp = head; temp != ind->next; temp = temp->next) {
-			if (value == temp->data)
-				break;
-		}
-		if (temp == ind->next) {
-			ind = ind->next;
-			ind->data = value;
-		}
-	}
-	// remove remaining list 
-	while (ind->next != NULL) {
-		size--;
-		Node* temp = ind->next;
-		ind->next = temp->next;
-		temp->next = NULL;
-		delete temp;
-		temp = NULL;
-	}
+	item->data = data;
 }
-
 /*
 	REMOVE GIVEN NODE FROM THE LIST
 */
@@ -217,49 +179,6 @@ List<T>* List<T>::clone() const
 	return new List<T>(*this);
 }
 
-/*
-	Two list should have same size
-*/
-template <typename T>
-typename List<T>::Node* List<T> ::sumDigitsWithCarry(Node* num1, Node* num2) {
-	Node* newHead = new Node;
-	Node* newCur = newHead;
-	int carry = 0;
-	for (Node* cur1 = num1, *cur2 = num2; cur1 != NULL && cur2 != NULL; cur1 = cur1->next, cur2 = cur2->next) {
-		int val1 = cur1->data;
-		int val2 = cur2->data;
-		int sum = val1 + val2;
-		int newDig = (sum % 10) + carry;
-
-		newCur->data = newDig;
-		newCur->next = new Node;
-		newCur = newCur->next;
-
-		carry = (sum / 10) ? 1 : 0;
-	}
-
-	if (carry == 1) {
-		newCur->data = 1;
-		newCur->next = NULL;
-	}
-
-	newCur = NULL;
-	return newHead;
-}
-
-
-/*
-Enter random int values in the range [0, max] to the begining
-of the linked list
-*/
-template <typename T>
-void List<T> ::randomIntFill(int item_num, int max) {
-	for (int i = 0; i < item_num; i++) {
-		int next_val = rand() % max;
-		add(0, next_val);
-	}
-}
-
 template <typename T>
 T List<T>::get(int index) {
 	if (index > size || index < 0) {
@@ -267,24 +186,20 @@ T List<T>::get(int index) {
 		return NULL;
 	}
 	Node* ptr = find(index);
-	return ptr->data;
+
+	return ptr != NULL ? ptr->data : NULL;
 }
 
 template <typename T>
 typename List<T>::Node* List<T>::find(int index) {
 	Node* cur = head;
+
+	if (index > size) return NULL;
+
 	for (int i = 0; i < index; i++) {
 		cur = cur->next;
 	}
 	return cur;
-}
-
-template <typename T>
-void List<T>::printList() {
-	for (Node* cur = head; cur != NULL; cur = cur->next) {
-		cout << cur->data << ' ';
-	}
-	cout << endl;
 }
 
 template <typename T>
@@ -300,22 +215,4 @@ int List<T>::getLength() {
 template <typename T>
 T List<T>::operator[](int index) {
 	return get(index);
-}
-
-#pragma endregion
-
-int main()
-{
-	List<int> list;
-	
-	int index = 0;
-	
-	list.add(index++, 1);
-	list.add(index++, 2);
-	list.add(index++, 3);
-
-	for (int i = 0; i < list.getLength(); i++) 
-	{
-		cout << list[i] << endl;
-	}
 }
