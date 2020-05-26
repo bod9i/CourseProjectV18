@@ -34,6 +34,7 @@ public:
 	void removeDuplicates();
 	void randomIntFill(int item_num, int max);
 	void removeNode(Node* node);
+	List<T>* clone() const;
 	Node* find(int index);
 	Node* sumDigitsWithCarry(Node* head1, Node* head2); // given two list of digits sum those lists
 							   // like they are natural numbers with given 1o's order
@@ -208,6 +209,12 @@ void List<T>::removeNode(Node* node) {
 		next_node = NULL;
 	}
 	size--;
+}
+
+template<typename T>
+List<T>* List<T>::clone() const
+{
+	return new List<T>(*this);
 }
 
 /*
