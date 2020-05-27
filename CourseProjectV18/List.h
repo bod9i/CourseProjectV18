@@ -5,46 +5,43 @@
 
 using namespace std;
 
-#ifdef USE_EXPORT_KEYWORD
-export
-#endif
-
 namespace list 
 {
 	template <typename T>
 	class List
 	{
+		private:
+			struct Node {
+				Node* next;
+				T data;
+			};
 
-	private:
-		struct Node {
-			Node* next;
-			T data;
-		};
+		public:
+			//constructer
+			List();
+			List(const List& aList); //copy constructer for deep copy
+			List(T item);
 
-	public:
-		//constructer
-		List();
-		List(const List& aList); //copy constructer for deep copy
-		List(T item);
+			//destructor
+			~List();
 
-		//destructor
-		~List();
+			//operations
+			bool isEmpty();
+			int getLength();
+			void add(int index, T data);
+			void remove(int index);
+			void update(int index, T data);
+			T* get(int index);
+			void removeNode(Node* node);
+			List<T>* clone() const;
+			Node* find(int index);
+			T* operator[] (int index);
 
-		//operations
-		bool isEmpty();
-		int getLength();
-		void add(int index, T data);
-		void remove(int index);
-		void update(int index, T data);
-		T get(int index);
-		void removeNode(Node* node);
-		List<T>* clone() const;
-		Node* find(int index);
-		T operator[] (int index);
+		private:
+			Node* head;
 
-	private:
-		int size;
-		Node* head;
+		protected:
+			int size;
 	};
 
 	template <typename T>
@@ -207,7 +204,7 @@ namespace list
 	}
 
 	template <typename T>
-	T List<T>::get(int index)
+	T* List<T>::get(int index)
 	{
 		if (index > size || index < 0)
 		{
@@ -216,7 +213,7 @@ namespace list
 		}
 		Node* ptr = find(index);
 
-		return ptr != NULL ? ptr->data : NULL;
+		return ptr != NULL ? &ptr->data : NULL;
 	}
 
 	template <typename T>
@@ -246,7 +243,7 @@ namespace list
 	}
 
 	template <typename T>
-	T List<T>::operator[](int index)
+	T* List<T>::operator[](int index)
 	{
 		return get(index);
 	}
