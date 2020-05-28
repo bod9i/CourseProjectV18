@@ -6,22 +6,34 @@ using namespace std;
 
 namespace list
 {
+	typedef struct addressHouse
+	{
+		string* street;
+		int houseNumber;
+		char optional = 'æ';
+	} AddressHouse;
+
 	typedef tm DateTime;
-	typedef struct
+	typedef struct apartment
 	{
 		int countRooms = 0;
 		double area = 0;
 		int floor = -1;
-		DateTime CreatedOn;
-		//AddressHouse addres;
-	} Apartment;
+		DateTime* createdOn;
+		AddressHouse* address;
 
-	typedef struct
-	{
-		string street;
-		int houseNumber = 0;
-		char optional = 'æ';
-	} AddressHouse;
+		~apartment()
+		{
+			delete createdOn;
+			delete address;
+		}
+
+		apartment()
+		{
+			address = new AddressHouse();
+			createdOn = new DateTime();
+		}
+	} Apartment;
 
 	enum SortingField
 	{
@@ -29,14 +41,14 @@ namespace list
 		AREA = 20
 	};
 
-	class ApartamentList : List<Apartment>
+	class ApartamentList : public List<Apartment>
 	{
 		public:
-			ApartamentList sort(SortingField field);
-			ApartamentList getOlderThanYear();
-			ApartamentList getLessOrEqualThanFloor(int floor);
-			ApartamentList getLessOrEqualThanArea(double area);
-			ApartamentList searchByStreet(string street);
+			ApartamentList* sort(SortingField field);
+			ApartamentList* getOlderThanYear();
+			ApartamentList* getLessOrEqualThanFloor(int floor);
+			ApartamentList* getLessOrEqualThanArea(double area);
+			ApartamentList* searchByStreet(string street);
 
 			int getCountByRoomCount(int count);
 	};
@@ -53,5 +65,23 @@ namespace list
 		}
 
 		return x;
+	}
+
+	ApartamentList* ApartamentList::searchByStreet(string street)
+	{
+		ApartamentList* result = new ApartamentList();
+		int j = 0;
+
+		for (int i = 0; i < size; i++)
+		{
+			auto temp = get(i);
+			
+			if (*temp->address->street == street)
+			{
+				result->add(j, temp);
+			}
+		}
+
+		return result;
 	}
 }
