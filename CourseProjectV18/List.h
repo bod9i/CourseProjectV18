@@ -128,12 +128,12 @@ namespace list
 	void List<T>::remove(int index) {
 		if (size == 0)
 		{
-			cout << "No item to remove in list!!" << endl;
+			cout << "No item to remove in list" << endl;
 			return;
 		}
 		else if (index >= size || index < 0)
 		{
-			cout << "No item with given index!!" << endl;
+			cout << "No item with given index" << endl;
 			return;
 		}
 
