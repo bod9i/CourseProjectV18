@@ -13,14 +13,14 @@ namespace list
 		private:
 			struct Node {
 				Node* next;
-				T data;
+				T* data;
 			};
 
 		public:
 			//constructer
 			List();
 			List(const List& aList); //copy constructer for deep copy
-			List(T item);
+			List(T* item);
 
 			//destructor
 			~List();
@@ -28,9 +28,9 @@ namespace list
 			//operations
 			bool isEmpty();
 			int getLength();
-			void add(int index, T data);
+			void add(int index, T* data);
 			void remove(int index);
-			void update(int index, T data);
+			void update(int index, T* data);
 			T* get(int index);
 			void removeNode(Node* node);
 			List<T>* clone() const;
@@ -59,7 +59,7 @@ namespace list
 	}
 
 	template <typename T>
-	List<T>::List(T item)
+	List<T>::List(T* item)
 	{
 		head = new Node();
 		head->data = item;
@@ -93,7 +93,7 @@ namespace list
 	}
 
 	template <typename T>
-	void List<T>::add(int index, T data)
+	void List<T>::add(int index, T* data)
 	{
 		if (index < 0)
 		{
@@ -109,7 +109,7 @@ namespace list
 		if (index == 0)
 		{
 			Node* new_head = new Node;
-			new_head->next = NULL;
+			new_head->next = head;
 			new_head->data = data;
 			head = new_head;
 		}//if insert into middle
@@ -151,13 +151,16 @@ namespace list
 			prev->next = cur->next;
 		}
 		cur->next = NULL;
+
+		delete cur->data;
 		delete cur;
+
 		cur = NULL;
 		size--;
 	}
 
 	template<typename T>
-	void List<T>::update(int index, T data)
+	void List<T>::update(int index, T* data)
 	{
 		Node* item = find(index);
 
@@ -167,6 +170,7 @@ namespace list
 			return;
 		}
 
+		delete item->data;
 		item->data = data;
 	}
 	/*
@@ -213,7 +217,7 @@ namespace list
 		}
 		Node* ptr = find(index);
 
-		return ptr != NULL ? &ptr->data : NULL;
+		return ptr != NULL ? ptr->data : NULL;
 	}
 
 	template <typename T>
