@@ -10,11 +10,12 @@ namespace list
 	template <typename T>
 	class List
 	{
-		private:
+		protected:
 			struct Node {
 				Node* next;
 				T* data;
 			};
+			int size;
 
 		public:
 			//constructer
@@ -39,9 +40,6 @@ namespace list
 
 		private:
 			Node* head;
-
-		protected:
-			int size;
 	};
 
 	template <typename T>
@@ -231,6 +229,7 @@ namespace list
 		{
 			cur = cur->next;
 		}
+
 		return cur;
 	}
 

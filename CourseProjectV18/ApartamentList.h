@@ -41,19 +41,19 @@ namespace list
 		AREA = 20
 	};
 
-	class ApartamentList : public List<Apartment>
+	class ApartmentList : public List<Apartment>
 	{
 		public:
-			ApartamentList* sort(SortingField field);
-			ApartamentList* getOlderThanYear();
-			ApartamentList* getLessOrEqualThanFloor(int floor);
-			ApartamentList* getLessOrEqualThanArea(double area);
-			ApartamentList* searchByStreet(string street);
+			ApartmentList* sort(SortingField field);
+			ApartmentList* getOlderThanYear();
+			ApartmentList* getLessOrEqualThanFloor(int floor);
+			ApartmentList* getLessOrEqualThanArea(double area);
+			ApartmentList* searchByStreet(string street);
 
 			int getCountByRoomCount(int count);
 	};
 
-	int ApartamentList::getCountByRoomCount(int count)
+	int ApartmentList::getCountByRoomCount(int count)
 	{
 		int x = 0;
 		for (int i = 0; i < size; i++)
@@ -67,9 +67,9 @@ namespace list
 		return x;
 	}
 
-	ApartamentList* ApartamentList::searchByStreet(string street)
+	ApartmentList* ApartmentList::searchByStreet(string street)
 	{
-		ApartamentList* result = new ApartamentList();
+		ApartmentList* result = new ApartmentList();
 		int j = 0;
 
 		for (int i = 0; i < size; i++)
@@ -85,9 +85,9 @@ namespace list
 		return result;
 	}
 
-	ApartamentList* ApartamentList::getLessOrEqualThanArea(double area)
+	ApartmentList* ApartmentList::getLessOrEqualThanArea(double area)
 	{
-		ApartamentList* result = new ApartamentList();
+		ApartmentList* result = new ApartmentList();
 		int j = 0;
 
 		for (int i = 0; i < size; i++)
@@ -103,9 +103,9 @@ namespace list
 		return result;
 	}
 
-	ApartamentList* ApartamentList::getLessOrEqualThanFloor(int floor)
+	ApartmentList* ApartmentList::getLessOrEqualThanFloor(int floor)
 	{
-		ApartamentList* result = new ApartamentList();
+		ApartmentList* result = new ApartmentList();
 		int j = 0;
 
 		for (int i = 0; i < size; i++)
@@ -121,9 +121,9 @@ namespace list
 		return result;
 	}
 
-	ApartamentList* ApartamentList::getOlderThanYear()
+	ApartmentList* ApartmentList::getOlderThanYear()
 	{
-		ApartamentList* result = new ApartamentList();
+		ApartmentList* result = new ApartmentList();
 		int j = 0;
 
 		for (int i = 0; i < size; i++)
@@ -136,6 +136,67 @@ namespace list
 			{
 				result->add(j++, temp);
 			}
+		}
+
+		return result;
+	}
+
+	ApartmentList* ApartmentList::sort(SortingField field)
+	{
+		auto result = new ApartmentList(*this);
+
+		Node* temp = new Node(); 
+
+		switch (field)
+		{
+			case COUNT_ROOMS:
+				for (int i = 0; i < size - 1; i++)
+				{
+					for (int j = 0; j < size - i - 1; j++)
+					{
+						auto current = result->find(j);
+
+						if (current->next == NULL)
+						{
+							return NULL;
+						}
+
+						auto next = result->find(j + 1);
+
+						if (current->data->countRooms > next->data->countRooms)
+						{
+							temp->data = current->data;
+							current->data = next->data;
+							next->data = temp->data;
+						}
+					}
+				}
+
+				break;
+			case AREA:
+
+				for (int i = 0; i < size - 1; i++)
+				{
+					for (int j = 0; j < size - i - 1; j++)
+					{
+						auto current = result->find(j);
+
+						if (current->next == NULL)
+						{
+							return NULL;
+						}
+
+						auto next = result->find(j + 1);
+
+						if (current->data->area > next->data->area)
+						{
+							temp->data = current->data;
+							current->data = next->data;
+							next->data = temp->data;
+						}
+					}
+				}
+				break;
 		}
 
 		return result;
