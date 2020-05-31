@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iostream>
 #include "List.h"
@@ -92,12 +92,12 @@ namespace list
 	{
 		if (index < 0)
 		{
-			cout << "Îòðèöàòåëüíûé èíäåêñ" << endl;
+			cout << "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹ Ð¸Ð½Ð´ÐµÐºÑ" << endl;
 			return;
 		}
 		if (index > size)
 		{
-			cout << "Íåêîððåêòíûé èíäåêñ" << endl;
+			cout << "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹ Ð¸Ð½Ð´ÐµÐºÑ" << endl;
 			return;
 		}
 		//if insert head
@@ -123,12 +123,12 @@ namespace list
 	void List<T>::remove(int index) {
 		if (size == 0)
 		{
-			cout << "Íåò ýëåìåíòîâ äëÿ óäàëåíèÿ" << endl;
+			cout << "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð¿ÑƒÑÑ‚" << endl;
 			return;
 		}
 		else if (index >= size || index < 0)
 		{
-			cout << "Íåêîððåêòíûé èíäåêñ" << endl;
+			cout << "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹ Ð¸Ð½Ð´ÐµÐºÑ" << endl;
 			return;
 		}
 
@@ -161,7 +161,7 @@ namespace list
 
 		if (item == NULL)
 		{
-			cout << "Íåêîððåêòíûé èíäåêñ" << endl;
+			cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ñ Ñ‚Ð°ÐºÐ¸Ð¼ id Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½" << endl;
 			return;
 		}
 
@@ -178,9 +178,9 @@ namespace list
 	template <typename T>
 	T* List<T>::get(int index)
 	{
-		if (index > size || index < 0)
+		if (index >= size || index < 0)
 		{
-			cout << "Íåêîððåêòíûé èíäåêñ" << endl;
+			cout << "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹  Ð¸Ð½Ð´ÐµÐºÑ" << endl;
 			return NULL;
 		}
 		Node* ptr = find(index);
