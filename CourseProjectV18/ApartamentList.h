@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "List.h"
 
@@ -6,12 +6,12 @@ using namespace std;
 
 namespace list
 {
-	typedef struct addressHouse
+	typedef struct apartmentAddress
 	{
 		string street;
 		int houseNumber;
 		string optional;
-	} AddressHouse;
+	} ApartmentAddress;
 
 	typedef tm DateTime;
 	typedef struct apartment
@@ -21,7 +21,7 @@ namespace list
 		double area = 0;
 		int floor = -1;
 		DateTime* createdOn;
-		AddressHouse* address;
+		ApartmentAddress* address;
 
 		~apartment()
 		{
@@ -31,7 +31,7 @@ namespace list
 
 		apartment()
 		{
-			address = new AddressHouse();
+			address = new ApartmentAddress();
 			createdOn = new DateTime();
 		}
 	} Apartment;
@@ -99,7 +99,7 @@ namespace list
 			
 			if (temp->address->street == street)
 			{
-				result->add(j++, temp);
+				result->List<Apartment>::add(j++, temp);
 			}
 		}
 
@@ -117,7 +117,7 @@ namespace list
 
 			if (temp->area <= area)
 			{
-				result->add(j++, temp);
+				result->List<Apartment>::add(j++, temp);
 			}
 		}
 
@@ -135,7 +135,7 @@ namespace list
 
 			if (temp->floor <= floor)
 			{
-				result->add(j++, temp);
+				result->List<Apartment>::add(j++, temp);
 			}
 		}
 
@@ -156,7 +156,7 @@ namespace list
 
 			if (temp->createdOn->tm_year < time->tm_year)
 			{
-				result->add(j++, temp);
+				result->List<Apartment>::add(j++, temp);
 			}
 		}
 

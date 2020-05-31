@@ -15,6 +15,7 @@ namespace list
 				Node* next;
 				T* data;
 			};
+			Node* head;
 			int size;
 
 		public:
@@ -33,13 +34,9 @@ namespace list
 			void remove(int index);
 			virtual void update(int index, T* data);
 			T* get(int index);
-			void removeNode(Node* node);
 			List<T>* clone() const;
 			Node* find(int index);
 			T* operator[] (int index);
-
-		private:
-			Node* head;
 	};
 
 	template <typename T>
@@ -170,33 +167,6 @@ namespace list
 
 		delete item->data;
 		item->data = data;
-	}
-	/*
-		REMOVE GIVEN NODE FROM THE LIST
-	*/
-	template <typename T>
-	void List<T>::removeNode(Node* node)
-	{
-		if (size == 0)
-		{
-			cout << "Лист пуст" << endl;
-			return;
-		}
-		if (node->next == NULL)
-		{ // if node is the tail
-			remove(getLength() - 1);
-		}
-		else
-		{
-			Node* next_node = node->next;
-			node->data = next_node->data;
-			// remove next_node
-			node->next = next_node->next;
-			next_node->next = NULL;
-			delete next_node;
-			next_node = NULL;
-		}
-		size--;
 	}
 
 	template<typename T>
