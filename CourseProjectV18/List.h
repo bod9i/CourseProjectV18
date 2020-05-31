@@ -29,9 +29,9 @@ namespace list
 			//operations
 			bool isEmpty();
 			int getLength();
-			void add(int index, T* data);
+			virtual void add(int index, T* data);
 			void remove(int index);
-			void update(int index, T* data);
+			virtual void update(int index, T* data);
 			T* get(int index);
 			void removeNode(Node* node);
 			List<T>* clone() const;
@@ -95,12 +95,12 @@ namespace list
 	{
 		if (index < 0)
 		{
-			cout << "Negative index" << endl;
+			cout << "Отрицательный индекс" << endl;
 			return;
 		}
 		if (index > size)
 		{
-			cout << "Extension is not supported" << endl;
+			cout << "Некорректный индекс" << endl;
 			return;
 		}
 		//if insert head
@@ -126,12 +126,12 @@ namespace list
 	void List<T>::remove(int index) {
 		if (size == 0)
 		{
-			cout << "No item to remove in list" << endl;
+			cout << "Нет элементов для удаления" << endl;
 			return;
 		}
 		else if (index >= size || index < 0)
 		{
-			cout << "No item with given index" << endl;
+			cout << "Некорректный индекс" << endl;
 			return;
 		}
 
@@ -164,7 +164,7 @@ namespace list
 
 		if (item == NULL)
 		{
-			cout << "Not found item with this index" << endl;
+			cout << "Некорректный индекс" << endl;
 			return;
 		}
 
@@ -179,7 +179,7 @@ namespace list
 	{
 		if (size == 0)
 		{
-			cout << "List is empty!!" << endl;
+			cout << "Лист пуст" << endl;
 			return;
 		}
 		if (node->next == NULL)
@@ -210,7 +210,7 @@ namespace list
 	{
 		if (index > size || index < 0)
 		{
-			cout << "Wrong index value!!!" << endl;
+			cout << "Некорректный индекс" << endl;
 			return NULL;
 		}
 		Node* ptr = find(index);

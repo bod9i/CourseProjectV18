@@ -8,14 +8,15 @@ namespace list
 {
 	typedef struct addressHouse
 	{
-		string* street;
+		string street;
 		int houseNumber;
-		char optional = 'æ';
+		string optional = "";
 	} AddressHouse;
 
 	typedef tm DateTime;
 	typedef struct apartment
 	{
+		int id;
 		int countRooms = 0;
 		double area = 0;
 		int floor = -1;
@@ -44,14 +45,34 @@ namespace list
 	class ApartmentList : public List<Apartment>
 	{
 		public:
-			ApartmentList* sort(SortingField field);
-			ApartmentList* getOlderThanYear();
-			ApartmentList* getLessOrEqualThanFloor(int floor);
-			ApartmentList* getLessOrEqualThanArea(double area);
+			ApartmentList* sort(SortingField field);//
+			ApartmentList* getOlderThanYear();//
+			ApartmentList* getLessOrEqualThanFloor(int floor);//
+			ApartmentList* getLessOrEqualThanArea(double area);//
 			ApartmentList* searchByStreet(string street);
+			virtual void add(int index, Apartment* data);
+			virtual void update(int index, Apartment* data);
 
 			int getCountByRoomCount(int count);
 	};
+
+	void ApartmentList::add(int index, Apartment* data)
+	{
+		List<Apartment>::add(index, data);
+		auto temp = get(index);
+		temp->id = size - 1;
+	}
+
+	void ApartmentList::update(int index, Apartment* data)
+	{
+		List<Apartment>::update(index, data);
+		auto temp = get(index);
+
+		if (temp != NULL)
+		{
+			temp->id = index;
+		}
+	}
 
 	int ApartmentList::getCountByRoomCount(int count)
 	{
@@ -76,7 +97,7 @@ namespace list
 		{
 			auto temp = get(i);
 			
-			if (*temp->address->street == street)
+			if (temp->address->street	== street)
 			{
 				result->add(j++, temp);
 			}
@@ -130,9 +151,10 @@ namespace list
 		{
 			auto nado = time(0);
 			auto temp = get(i);
-			auto localTime = localtime(&nado);
+			auto time = localtime(&nado);
+			time->tm_year += 1900;
 
-			if (temp->createdOn->tm_year < localTime->tm_year)
+			if (temp->createdOn->tm_year < time->tm_year)
 			{
 				result->add(j++, temp);
 			}
