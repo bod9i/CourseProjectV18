@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 #include <time.h>
@@ -16,19 +16,19 @@ bool IsDigit(string item)
 	{
 		switch (item[i])
 		{
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-				continue;
-			default:
-				return false;
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			continue;
+		default:
+			return false;
 		}
 	}
 
@@ -44,7 +44,7 @@ Apartment* initializeItem()
 
 	while (true)
 	{
-		cout << endl << "Введите число комнат: ";
+		cout << endl << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РєРѕРјРЅР°С‚: ";
 		cin >> temp;
 
 		if (IsDigit(temp))
@@ -54,12 +54,12 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl;
+		cout << endl << "Р’РІРµРґРµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»РѕРј!" << endl;
 	}
 
 	while (true)
 	{
-		cout << endl << "Введите площадь: ";
+		cout << endl << "Р’РІРµРґРёС‚Рµ РїР»РѕС‰Р°РґСЊ: ";
 		cin >> temp;
 
 		if (IsDigit(temp))
@@ -69,12 +69,12 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl;;
+		cout << endl << "Р’РІРµРґРµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»РѕРј!" << endl;;
 	}
 
 	while (true)
 	{
-		cout << endl << "Введите этаж: ";
+		cout << endl << "Р’РІРµРґРёС‚Рµ СЌС‚Р°Р¶: ";
 		cin >> temp;
 
 		if (IsDigit(temp))
@@ -84,15 +84,15 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl;
+		cout << endl << "Р’РІРµРґРµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»РѕРј!" << endl;
 	}
 
-	cout << endl << "Введите улицу: ";
+	cout << endl << "Р’РІРµРґРёС‚Рµ СѓР»РёС†Сѓ: ";
 	cin >> apart->address->street;
 
 	while (true)
 	{
-		cout << endl << "Введите номер дома: ";
+		cout << endl << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РґРѕРјР°: ";
 		cin >> temp;
 
 		if (IsDigit(temp))
@@ -102,10 +102,10 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl;
+		cout << endl << "Р’РІРµРґРµРЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»РѕРј!" << endl;
 	}
 
-	cout << endl << "Введите букву дома (не обязательно): ";
+	cout << endl << "Р’РІРµРґРёС‚Рµ Р±СѓРєРІСѓ РґРѕРјР° (РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ): ";
 	cin >> apart->address->optional;
 
 	cin.clear();
@@ -116,16 +116,16 @@ Apartment* initializeItem()
 	delete apart->createdOn;
 	apart->createdOn = date;
 
-	apart->createdOn->tm_year += 1900; // спросите у индуса, который написал эту функцию (localtime(*time_t)), какого это нужно делать
+	apart->createdOn->tm_year += 1900; // СЃРїСЂРѕСЃРёС‚Рµ Сѓ РёРЅРґСѓСЃР°, РєРѕС‚РѕСЂС‹Р№ РЅР°РїРёСЃР°Р» СЌС‚Сѓ С„СѓРЅРєС†РёСЋ (localtime(*time_t)), РєР°РєРѕРіРѕ СЌС‚Рѕ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ
 
 	return apart;
 }
 
 void print(ApartmentList* list)
 {
-	cout << " Id\tКомнат\tПлощадь\tЭтаж\tДата создания записи\tАдрес дома" << endl;
- 
- 	for (int i = 0; i < list->getLength(); i++)
+	cout << " Id\tРљРѕРјРЅР°С‚\tРџР»РѕС‰Р°РґСЊ\tР­С‚Р°Р¶\tР”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ Р·Р°РїРёСЃРё\tРђРґСЂРµСЃ РґРѕРјР°" << endl;
+
+	for (int i = 0; i < list->getLength(); i++)
 	{
 		auto item = list->get(i);
 		cout << "--------------------------------------------------------------------------" << endl;
@@ -137,9 +137,9 @@ void print(ApartmentList* list)
 void cli(ApartmentList* list)
 {
 	string command;
-	cout << "Для показа возможных операций, введите 'help'" << endl << endl;
+	cout << "Р”Р»СЏ РїРѕРєР°Р·Р° РІРѕР·РјРѕР¶РЅС‹С… РѕРїРµСЂР°С†РёР№, РІРІРµРґРёС‚Рµ 'help'" << endl << endl;
 	while (true)
-	{ 
+	{
 		cin.clear();
 		cout << "C:\>";
 		cin >> command;
@@ -147,16 +147,16 @@ void cli(ApartmentList* list)
 
 		if (command == "help")
 		{
-			cout << "add => добавление єлемента" << endl;
-			cout << "update => обновление єлемента" << endl;
-			cout << "remove => удаление єлемента" << endl;
-			cout << "sort => сортировка элементов по одному из двух, доступных для сортировки полей" << endl;
-			cout << "olderYear => получить элементы, которые были созданы в прошлом году" << endl;
-			cout << "lessThanFloor => получить элементы, у которых этаж меньше либо равны указаному этажу" << endl;
-			cout << "lessThanArea => получить элементы, у которых площадь меньше либо равны указаной площади" << endl;
-			cout << "searchByStreet => получить элементы, чье название улицы совпадает с указаным" << endl;
-			cout << "countByCountRooms => получить количевство квартир, с указанной кол-вом комнат" << endl;
-			cout << "print => получить элементы в исходном порядке" << endl << endl;
+			cout << "add => РґРѕР±Р°РІР»РµРЅРёРµ С”Р»РµРјРµРЅС‚Р°" << endl;
+			cout << "update => РѕР±РЅРѕРІР»РµРЅРёРµ С”Р»РµРјРµРЅС‚Р°" << endl;
+			cout << "remove => СѓРґР°Р»РµРЅРёРµ С”Р»РµРјРµРЅС‚Р°" << endl;
+			cout << "sort => СЃРѕСЂС‚РёСЂРѕРІРєР° СЌР»РµРјРµРЅС‚РѕРІ РїРѕ РѕРґРЅРѕРјСѓ РёР· РґРІСѓС…, РґРѕСЃС‚СѓРїРЅС‹С… РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕР»РµР№" << endl;
+			cout << "olderYear => РїРѕР»СѓС‡РёС‚СЊ СЌР»РµРјРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё СЃРѕР·РґР°РЅС‹ РІ РїСЂРѕС€Р»РѕРј РіРѕРґСѓ" << endl;
+			cout << "lessThanFloor => РїРѕР»СѓС‡РёС‚СЊ СЌР»РµРјРµРЅС‚С‹, Сѓ РєРѕС‚РѕСЂС‹С… СЌС‚Р°Р¶ РјРµРЅСЊС€Рµ Р»РёР±Рѕ СЂР°РІРЅС‹ СѓРєР°Р·Р°РЅРѕРјСѓ СЌС‚Р°Р¶Сѓ" << endl;
+			cout << "lessThanArea => РїРѕР»СѓС‡РёС‚СЊ СЌР»РµРјРµРЅС‚С‹, Сѓ РєРѕС‚РѕСЂС‹С… РїР»РѕС‰Р°РґСЊ РјРµРЅСЊС€Рµ Р»РёР±Рѕ СЂР°РІРЅС‹ СѓРєР°Р·Р°РЅРѕР№ РїР»РѕС‰Р°РґРё" << endl;
+			cout << "searchByStreet => РїРѕР»СѓС‡РёС‚СЊ СЌР»РµРјРµРЅС‚С‹, С‡СЊРµ РЅР°Р·РІР°РЅРёРµ СѓР»РёС†С‹ СЃРѕРІРїР°РґР°РµС‚ СЃ СѓРєР°Р·Р°РЅС‹Рј" << endl;
+			cout << "countByCountRooms => РїРѕР»СѓС‡РёС‚СЊ РєРѕР»РёС‡РµРІСЃС‚РІРѕ РєРІР°СЂС‚РёСЂ, СЃ СѓРєР°Р·Р°РЅРЅРѕР№ РєРѕР»-РІРѕРј РєРѕРјРЅР°С‚" << endl;
+			cout << "print => РїРѕР»СѓС‡РёС‚СЊ СЌР»РµРјРµРЅС‚С‹ РІ РёСЃС…РѕРґРЅРѕРј РїРѕСЂСЏРґРєРµ" << endl << endl;
 
 			cin.clear();
 
@@ -167,7 +167,7 @@ void cli(ApartmentList* list)
 			int index = list->getLength();
 
 			list->add(index, initializeItem());
-			
+
 			cin.clear();
 			system("cls");
 		}
@@ -175,7 +175,7 @@ void cli(ApartmentList* list)
 		{
 			int index;
 
-			cout << "Введите индекс элемента, который хотите обновить: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р°, РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёС‚Рµ РѕР±РЅРѕРІРёС‚СЊ: ";
 			cin >> index;
 
 			list->update(index, initializeItem());
@@ -187,7 +187,7 @@ void cli(ApartmentList* list)
 		{
 			int index;
 
-			cout << "Введите индекс элемента, который хотите удалить: ";
+			cout << "Р’РІРµРґРёС‚Рµ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р°, РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ: ";
 			cin >> index;
 
 			list->remove(index);
@@ -197,11 +197,11 @@ void cli(ApartmentList* list)
 		}
 		else if (command == "sort")
 		{
-			cout << "1. По числу комнат" << endl;
-			cout << "2. По площади" << endl << endl;
+			cout << "1. РџРѕ С‡РёСЃР»Сѓ РєРѕРјРЅР°С‚" << endl;
+			cout << "2. РџРѕ РїР»РѕС‰Р°РґРё" << endl << endl;
 
 			int choose;
-			cout << "Выберите, по какому полю отсоритровать: ";
+			cout << "Р’С‹Р±РµСЂРёС‚Рµ, РїРѕ РєР°РєРѕРјСѓ РїРѕР»СЋ РѕС‚СЃРѕСЂРёС‚СЂРѕРІР°С‚СЊ: ";
 			cin >> choose;
 
 			cin.clear();
@@ -222,7 +222,7 @@ void cli(ApartmentList* list)
 		{
 			int floor;
 
-			cout << "Введите этаж: ";
+			cout << "Р’РІРµРґРёС‚Рµ СЌС‚Р°Р¶: ";
 			cin >> floor;
 
 			system("cls");
@@ -235,7 +235,7 @@ void cli(ApartmentList* list)
 		{
 			double area;
 
-			cout << "Введите площадь: ";
+			cout << "Р’РІРµРґРёС‚Рµ РїР»РѕС‰Р°РґСЊ: ";
 			cin >> area;
 
 			system("cls");
@@ -247,8 +247,8 @@ void cli(ApartmentList* list)
 		else if (command == "searchByStreet")
 		{
 			string street;
-			
-			cout << "Введите улицу: ";	
+
+			cout << "Р’РІРµРґРёС‚Рµ СѓР»РёС†Сѓ: ";
 			cin >> street;
 
 			system("cls");
@@ -260,23 +260,23 @@ void cli(ApartmentList* list)
 		else if (command == "countByCountRooms")
 		{
 			int count;
-			cout << "Введите кол-во комнат: ";
+			cout << "Р’РІРµРґРёС‚Рµ РєРѕР»-РІРѕ РєРѕРјРЅР°С‚: ";
 			cin >> count;
 
 			cin.clear();
-			cout << "Кол-во квартир с указанным количевством комнат: " << list->getCountByRoomCount(count) << endl << endl;
+			cout << "РљРѕР»-РІРѕ РєРІР°СЂС‚РёСЂ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РєРѕР»РёС‡РµРІСЃС‚РІРѕРј РєРѕРјРЅР°С‚: " << list->getCountByRoomCount(count) << endl << endl;
 			system("pause");
 			system("cls");
 		}
-		else if (command == "print") 
-		{ 
+		else if (command == "print")
+		{
 			cin.clear();
-			system("cls"); 
+			system("cls");
 		}
-		else 
-		{ 
+		else
+		{
 			cin.clear();
-			cout << "Неверно введённая команда" << endl << endl;
+			cout << "РќРµРІРµСЂРЅРѕ РІРІРµРґС‘РЅРЅР°СЏ РєРѕРјР°РЅРґР°" << endl << endl;
 			command = "";
 			continue;
 		}
@@ -313,16 +313,16 @@ int main()
 	some2->address = new ApartmentAddress();
 	some3->address = new ApartmentAddress();
 
-	some1->address->street = "Королёва";
-	some2->address->street = "Варненская";
-	some3->address->street = "Шклярука";
+	some1->address->street = "РљРѕСЂРѕР»С‘РІР°";
+	some2->address->street = "Р’Р°СЂРЅРµРЅСЃРєР°СЏ";
+	some3->address->street = "РЁРєР»СЏСЂСѓРєР°";
 
 	some1->address->houseNumber = 78;
 	some2->address->houseNumber = 11;
 	some3->address->houseNumber = 56;
 
 	some1->address->optional = "A";
-	some3->address->optional = "Б";
+	some3->address->optional = "Р‘";
 
 	DateTime* someDate1 = new DateTime();
 
@@ -347,13 +347,13 @@ int main()
 	some3->createdOn = someDate3;
 
 	ApartmentList* list = new ApartmentList();
-	
+
 	list->ApartmentList::add(0, some1);
 	list->ApartmentList::add(1, some2);
 	list->ApartmentList::add(2, some3);
 
 	print(list);
 	cli(list);
-		
+
 	return 0;
 }
