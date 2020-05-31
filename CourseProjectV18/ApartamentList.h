@@ -45,10 +45,10 @@ namespace list
 	class ApartmentList : public List<Apartment>
 	{
 		public:
-			ApartmentList* sort(SortingField field);//
-			ApartmentList* getOlderThanYear();//
-			ApartmentList* getLessOrEqualThanFloor(int floor);//
-			ApartmentList* getLessOrEqualThanArea(double area);//
+			ApartmentList* sort(SortingField field);
+			ApartmentList* getOlderThanYear();
+			ApartmentList* getLessOrEqualThanFloor(int floor);
+			ApartmentList* getLessOrEqualThanArea(double area);
 			ApartmentList* searchByStreet(string street);
 			virtual void add(int index, Apartment* data);
 			virtual void update(int index, Apartment* data);
@@ -97,7 +97,7 @@ namespace list
 		{
 			auto temp = get(i);
 			
-			if (temp->address->street	== street)
+			if (temp->address->street == street)
 			{
 				result->add(j++, temp);
 			}
