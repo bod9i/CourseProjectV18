@@ -10,7 +10,7 @@ namespace list
 	{
 		string street;
 		int houseNumber;
-		string optional = "";
+		string optional;
 	} AddressHouse;
 
 	typedef tm DateTime;

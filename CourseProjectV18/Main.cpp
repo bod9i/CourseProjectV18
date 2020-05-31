@@ -54,7 +54,7 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl << endl;
+		cout << endl << "Введенное значение не является числом!" << endl;
 	}
 
 	while (true)
@@ -69,7 +69,7 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl << endl;;
+		cout << endl << "Введенное значение не является числом!" << endl;;
 	}
 
 	while (true)
@@ -84,7 +84,7 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl << endl;
+		cout << endl << "Введенное значение не является числом!" << endl;
 	}
 
 	cout << endl << "Введите улицу: ";
@@ -102,7 +102,7 @@ Apartment* initializeItem()
 			break;
 		}
 
-		cout << endl << "Введенное значение не является числом!" << endl << endl;
+		cout << endl << "Введенное значение не является числом!" << endl;
 	}
 
 	cout << endl << "Введите номер дома: ";
@@ -110,6 +110,8 @@ Apartment* initializeItem()
 
 	cout << endl << "Введите букву дома (не обязательно): ";
 	cin >> apart->address->optional;
+
+	cin.clear();
 
 	auto nado = time(0);
 	date = new DateTime(*localtime(&nado));
@@ -137,11 +139,10 @@ void print(ApartmentList* list)
 
 void CLI(ApartmentList* list)
 {
+	string command;
 	cout << "Для показа возможных операций, введите 'help'" << endl << endl;
 	while (true)
 	{
-		string command;
-
 		cout << "C:\>";
 		cin >> command;
 		cout << endl;
@@ -159,6 +160,8 @@ void CLI(ApartmentList* list)
 			cout << "countByCountRooms => получить количевство квартир, с указанной кол-вом комнат" << endl;
 			cout << "print => получить элементы в исходном порядке" << endl << endl;
 
+			cin.clear();
+
 			continue;
 		}
 		else if (command == "add")
@@ -166,7 +169,8 @@ void CLI(ApartmentList* list)
 			int index = list->getLength();
 
 			list->add(index, initializeItem());
-
+			
+			cin.clear();
 			system("cls");
 		}
 		else if (command == "update")
@@ -178,6 +182,7 @@ void CLI(ApartmentList* list)
 
 			list->update(index, initializeItem());
 
+			cin.clear();
 			system("cls");
 		}
 		else if (command == "remove")
@@ -189,6 +194,7 @@ void CLI(ApartmentList* list)
 
 			list->remove(index);
 
+			cin.clear();
 			system("cls");
 		}
 		else if (command == "sort")
@@ -200,6 +206,7 @@ void CLI(ApartmentList* list)
 			cout << "Выберите, по какому полю отсоритровать: ";
 			cin >> choose;
 
+			cin.clear();
 			system("cls");
 			print(list->sort(choose == 1 ? COUNT_ROOMS : AREA));
 
@@ -209,6 +216,7 @@ void CLI(ApartmentList* list)
 		{
 			system("cls");
 
+			cin.clear();
 			print(list->getOlderThanYear());
 			continue;
 		}
@@ -221,6 +229,7 @@ void CLI(ApartmentList* list)
 
 			system("cls");
 
+			cin.clear();
 			print(list->getLessOrEqualThanFloor(floor));
 			continue;
 		}
@@ -233,6 +242,7 @@ void CLI(ApartmentList* list)
 
 			system("cls");
 
+			cin.clear();
 			print(list->getLessOrEqualThanArea(area));
 			continue;
 		}
@@ -245,6 +255,7 @@ void CLI(ApartmentList* list)
 
 			system("cls");
 
+			cin.clear();
 			print(list->searchByStreet(street));
 			continue;
 		}
@@ -254,20 +265,25 @@ void CLI(ApartmentList* list)
 			cout << "Введите кол-во комнат: ";
 			cin >> count;
 
+			cin.clear();
 			cout << "Кол-во квартир с указанным количевством комнат: " << list->getCountByRoomCount(count) << endl << endl;
 			system("pause");
 			system("cls");
 		}
 		else if (command == "print") 
 		{ 
+			cin.clear();
 			system("cls"); 
 		}
 		else 
 		{ 
+			cin.clear();
 			cout << "Неверно введённая команда" << endl << endl;
+			command = "";
 			continue;
 		}
 
+		command = "";
 		print(list);
 	}
 }
